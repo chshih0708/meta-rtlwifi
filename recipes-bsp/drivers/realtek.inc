@@ -12,8 +12,12 @@ inherit module
 #  until after the do_compile_kernelmodules completes...)
 do_compile[depends] += "virtual/kernel:do_compile_kernelmodules" 
 
-# Pass a few extra envvars in...
-EXTRA_OEMAKE += " ARCH=${ARCH} KSRC=${STAGING_KERNEL_DIR} MODDESTDIR=${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}"
+# Pass a few extra envvars in...including some of the more common platform defines...
+EXTRA_OEMAKE += " \
+    ARCH=${ARCH} \
+    KSRC=${STAGING_KERNEL_DIR} \
+    MODDESTDIR=${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION} \
+    "
 
 # Override the modules install target...
 MODULES_INSTALL_TARGET = "install"
